@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag NWB:$(date +%s)
+      run: time docker build -t mynwbosb -f Dockerfile .
 
 
