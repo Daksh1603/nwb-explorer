@@ -32,7 +32,10 @@ COPY --from=jsbuild --chown=1000:1000 $FOLDER $FOLDER
 WORKDIR $FOLDER
 
 
-RUN npx browserslist@latest --update-db
+# Update Browserslist
+RUN cd webapp && npx browserslist@latest --update-db
+
+RUN cd ../
 
 # Temporary fix for deprecated api usage on some requirement
 RUN pip install setuptools==45
