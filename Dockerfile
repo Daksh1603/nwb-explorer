@@ -1,4 +1,4 @@
-FROM node:13.14 as jsbuild
+FROM node:16 as jsbuild
 
 ENV FOLDER=nwb-explorer
 
@@ -32,13 +32,13 @@ COPY --from=jsbuild --chown=1000:1000 $FOLDER $FOLDER
 WORKDIR $FOLDER
 
 
-
+RUN npx browserslist@latest --update-db
 
 # Temporary fix for deprecated api usage on some requirement
 RUN pip install setuptools==45
 
 USER root
-RUN python utilities/install.py --npm-skip
+RUN python utilities/install.py 
 
 
 RUN rm -rf /var/lib/apt/lists
